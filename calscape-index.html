@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calscape helps you discover California native plants and build a beautiful, sustainable garden.">
+<title>Calscape | California Native Plants</title>
+<style>
+:root{
+  --green:#244d2a;
+  --green-2:#356b3d;
+  --sage:#dfead8;
+  --cream:#f7f8f2;
+  --ink:#17301d;
+  --muted:#607064;
+  --white:#fff;
+  --line:#dce4d9;
+  --shadow:0 18px 50px rgba(26,52,31,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(36,77,42,.96);backdrop-filter:blur(12px);color:white;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:30px;font-weight:800;letter-spacing:-1px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{font-size:16px;font-weight:600;opacity:.92}
+.navlinks a:hover{opacity:1;text-decoration:underline}
+.menu{display:none;background:transparent;border:1px solid rgba(255,255,255,.35);color:white;border-radius:10px;padding:8px 11px}
+.hero{background:linear-gradient(135deg,#dfead8 0%,#cfe2c7 100%);padding:100px 0 90px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}
+.eyebrow{display:inline-block;background:white;color:var(--green-2);padding:7px 13px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:20px}
+h1{font-size:clamp(44px,6vw,76px);line-height:1.03;letter-spacing:-3px;margin-bottom:24px}
+.hero p{font-size:20px;color:#38513e;max-width:650px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:13px;padding:14px 22px;font-weight:800;transition:.2s}
+.btn-primary{background:var(--green);color:white;box-shadow:0 10px 24px rgba(36,77,42,.22)}
+.btn-primary:hover{transform:translateY(-2px);background:#1c4022}
+.btn-light{background:white;color:var(--green);margin-left:8px}
+.hero-art{min-height:420px;border-radius:28px;background:
+linear-gradient(rgba(20,50,26,.10),rgba(20,50,26,.10)),
+url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=85') center/cover;
+box-shadow:var(--shadow)}
+section{padding:88px 0}
+.section-head{text-align:center;max-width:700px;margin:0 auto 45px}
+.section-head h2{font-size:clamp(34px,5vw,50px);line-height:1.08;letter-spacing:-1.5px;margin-bottom:13px}
+.section-head p{color:var(--muted);font-size:18px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow);transition:.2s}
+.card:hover{transform:translateY(-5px)}
+.icon{width:52px;height:52px;border-radius:15px;background:var(--sage);display:grid;place-items:center;font-size:25px;margin-bottom:18px}
+.card h3{font-size:22px;margin-bottom:8px}
+.card p{color:var(--muted);margin-bottom:18px}
+.text-link{color:var(--green-2);font-weight:800}
+.finder{background:#edf3e9}
+.searchbox{background:white;padding:22px;border-radius:20px;box-shadow:var(--shadow);display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px}
+input,select{width:100%;padding:14px 15px;border:1px solid #ccd8ca;border-radius:11px;background:white;color:var(--ink);outline:none}
+input:focus,select:focus{border-color:var(--green-2);box-shadow:0 0 0 3px rgba(53,107,61,.12)}
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.plant{background:white;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 30px rgba(26,52,31,.07)}
+.plant img{width:100%;height:190px;object-fit:cover;display:block}
+.plant-body{padding:20px}
+.plant h3{margin-bottom:3px}
+.sciname{font-style:italic;color:var(--muted);font-size:14px;margin-bottom:10px}
+.tag{display:inline-block;background:var(--sage);color:var(--green);font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px}
+.plant small{display:block;color:var(--muted);margin-top:12px}
+.planner{background:var(--green);color:white}
+.planner .section-head p{color:#dce9dc}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:24px}
+.plan strong{display:block;font-size:20px;margin-bottom:7px}
+.plan span{color:#dce9dc}
+.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.article{background:white;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.article img{height:170px;width:100%;object-fit:cover}
+.article div{padding:22px}
+.article h3{margin-bottom:8px}
+.article p{color:var(--muted)}
+.cta{padding:75px 0}
+.cta-box{background:linear-gradient(135deg,#cfe2c7,#e8f0e4);border-radius:28px;padding:55px;text-align:center}
+.cta-box h2{font-size:40px;line-height:1.1;margin-bottom:12px}
+.cta-box p{color:#4d6251;max-width:650px;margin:0 auto 24px}
+footer{background:#142519;color:#d9e4da;padding:45px 0}
+.footer-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer h3{color:white;margin-bottom:7px}
+footer p{color:#aebdb0}
+.mobile-links{display:none}
+@media(max-width:800px){
+ .nav{min-height:68px}.navlinks{display:none}.menu{display:block}
+ .mobile-links{display:none;flex-direction:column;padding:0 0 18px;gap:12px}.mobile-links.open{display:flex}
+ .hero{padding:65px 0}.hero-grid{grid-template-columns:1fr;gap:30px}.hero-art{min-height:300px}
+ h1{letter-spacing:-2px}.hero p{font-size:18px}
+ .cards,.results,.plan-grid,.learn-grid{grid-template-columns:1fr}
+ .searchbox{grid-template-columns:1fr}
+ .btn-light{margin:10px 0 0}
+ .cta-box{padding:38px 22px}.cta-box h2{font-size:32px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">Calscape</a>
+    <nav class="navlinks">
+      <a href="#home">Home</a><a href="#plants">Plants</a><a href="#planner">Planner</a><a href="#learn">Learn</a>
+    </nav>
+    <button class="menu" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+  </div>
+  <div id="mobileLinks" class="container mobile-links">
+    <a href="#home" onclick="closeMenu()">Home</a><a href="#plants" onclick="closeMenu()">Plants</a>
+    <a href="#planner" onclick="closeMenu()">Planner</a><a href="#learn" onclick="closeMenu()">Learn</a>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero">
+ <div class="container hero-grid">
+  <div>
+   <span class="eyebrow">CALIFORNIA NATIVE GARDENING</span>
+   <h1>Discover California Native Plants</h1>
+   <p>Explore plants that belong in California's unique landscapes. Find native species, learn how to grow them, and create a beautiful, sustainable garden.</p>
+   <a class="btn btn-primary" href="#plants">Explore Plants →</a>
+   <a class="btn btn-light" href="#learn">Learn More</a>
+  </div>
+  <div class="hero-art" aria-label="California native garden"></div>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="section-head">
+   <h2>What are you looking for?</h2>
+   <p>Start with a goal and we'll point you toward useful plants, planning ideas, and growing information.</p>
+  </div>
+  <div class="cards">
+   <div class="card"><div class="icon">🌿</div><h3>Find Plants</h3><p>Browse native plants by type, sunlight, water needs, and garden use.</p><a class="text-link" href="#plants">Browse plants →</a></div>
+   <div class="card"><div class="icon">🪴</div><h3>Plan a Garden</h3><p>Build a simple planting plan around your space, light, and watering goals.</p><a class="text-link" href="#planner">Open planner →</a></div>
+   <div class="card"><div class="icon">📚</div><h3>Learn</h3><p>Get beginner-friendly tips for planting, watering, pruning, and maintenance.</p><a class="text-link" href="#learn">Start learning →</a></div>
+  </div>
+ </div>
+</section>
+
+<section id="plants" class="finder">
+ <div class="container">
+  <div class="section-head">
+   <h2>Find the right plant</h2>
+   <p>Try the filters below. This demo finder works instantly in your browser.</p>
+  </div>
+  <div class="searchbox">
+   <input id="search" type="search" placeholder="Search plants..." oninput="filterPlants()">
+   <select id="sun" onchange="filterPlants()"><option value="">Any sunlight</option><option>Full sun</option><option>Part shade</option></select>
+   <select id="water" onchange="filterPlants()"><option value="">Any water</option><option>Low</option><option>Moderate</option></select>
+   <button class="btn btn-primary" onclick="resetFilters()">Reset</button>
+  </div>
+  <div id="results" class="results"></div>
+ </div>
+</section>
+
+<section id="planner" class="planner">
+ <div class="container">
+  <div class="section-head">
+   <h2>Build a simple garden plan</h2>
+   <p>Choose the kind of space you're working with, then use the checklist as a starting point.</p>
+  </div>
+  <div class="plan-grid">
+   <div class="plan"><strong>☀️ Sunny yard</strong><span>Prioritize drought-tolerant plants, mulch, and efficient watering.</span></div>
+   <div class="plan"><strong>🌤️ Part-shade space</strong><span>Mix plants that enjoy morning light with shade-tolerant understory plants.</span></div>
+   <div class="plan"><strong>🦋 Wildlife garden</strong><span>Add flowering natives and layers of plants that provide food and habitat.</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="learn">
+ <div class="container">
+  <div class="section-head">
+   <h2>Learn the basics</h2>
+   <p>Simple information to help a new native garden get off to a strong start.</p>
+  </div>
+  <div class="learn-grid">
+   <article class="article"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80" alt="Gardening"><div><h3>Start with your site</h3><p>Observe sunlight, soil, drainage, and available space before choosing plants.</p></div></article>
+   <article class="article"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=900&q=80" alt="Plants in a garden"><div><h3>Water wisely</h3><p>Native plants still need appropriate establishment care. Water deeply and adjust as plants mature.</p></div></article>
+   <article class="article"><img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=900&q=80" alt="Green plants"><div><h3>Think long term</h3><p>Choose plants for their mature size and give them room to grow into the landscape.</p></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="cta">
+ <div class="container"><div class="cta-box">
+  <h2>Ready to grow something beautiful?</h2>
+  <p>Explore the plant finder, sketch out your garden, and keep learning about California's native landscape.</p>
+  <a class="btn btn-primary" href="#plants">Find a Plant</a>
+ </div></div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-grid">
+  <div><h3>Calscape</h3><p>California native plants, simplified.</p></div>
+  <p>Practice website project • Built with HTML, CSS & JavaScript</p>
+ </div>
+</footer>
+
+<script>
+const plants=[
+ {name:"California Poppy",scientific:"Eschscholzia californica",sun:"Full sun",water:"Low",img:"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=80",desc:"A bright, easygoing native wildflower."},
+ {name:"Toyon",scientific:"Heteromeles arbutifolia",sun:"Full sun",water:"Low",img:"https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=80",desc:"An evergreen shrub with year-round garden interest."},
+ {name:"California Lilac",scientific:"Ceanothus",sun:"Full sun",water:"Low",img:"https://images.unsplash.com/photo-1469259943454-aa100abba749?auto=format&fit=crop&w=900&q=80",desc:"A flowering shrub known for blue spring blooms."},
+ {name:"Douglas Iris",scientific:"Iris douglasiana",sun:"Part shade",water:"Moderate",img:"https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=80",desc:"A colorful perennial for a woodland-style garden."},
+ {name:"Coffeeberry",scientific:"Frangula californica",sun:"Part shade",water:"Low",img:"https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80",desc:"A versatile evergreen shrub with wildlife value."},
+ {name:"Yarrow",scientific:"Achillea millefolium",sun:"Full sun",water:"Low",img:"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=80",desc:"A hardy flowering perennial for sunny spaces."}
+];
+function renderPlants(list=plants){
+ const box=document.getElementById("results");
+ box.innerHTML=list.length?list.map(p=>`<article class="plant"><img src="${p.img}" alt="${p.name}"><div class="plant-body"><h3>${p.name}</h3><div class="sciname">${p.scientific}</div><span class="tag">${p.sun}</span> <span class="tag">${p.water} water</span><small>${p.desc}</small></div></article>`).join(""):`<div class="card" style="grid-column:1/-1;text-align:center"><h3>No plants found</h3><p>Try clearing a filter or searching another name.</p></div>`;
+}
+function filterPlants(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const sun=document.getElementById("sun").value;
+ const water=document.getElementById("water").value;
+ renderPlants(plants.filter(p=>(!q||(p.name+" "+p.scientific).toLowerCase().includes(q))&&(!sun||p.sun===sun)&&(!water||p.water===water)));
+}
+function resetFilters(){document.getElementById("search").value="";document.getElementById("sun").value="";document.getElementById("water").value="";renderPlants();}
+function toggleMenu(){document.getElementById("mobileLinks").classList.toggle("open")}
+function closeMenu(){document.getElementById("mobileLinks").classList.remove("open")}
+renderPlants();
+</script>
+</body>
+</html>
