@@ -1,0 +1,12 @@
+calscape-site/
+├── index.html
+├── plants.html
+├── plant.html
+├── planner.html
+├── learn.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── plants.js
+│   └── finder.js
+└── README.md
